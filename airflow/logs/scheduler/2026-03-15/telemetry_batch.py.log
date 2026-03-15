@@ -1,0 +1,175 @@
+[2026-03-15T00:00:27.812+0000] {processor.py:161} INFO - Started process (PID=1040) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:00:27.813+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:00:27.814+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:00:27.814+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:00:27.820+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:00:27.832+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:00:27.832+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:00:27.843+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:00:27.843+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:00:00+00:00, run_after=2026-03-15 00:05:00+00:00
+[2026-03-15T00:00:27.854+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.045 seconds
+[2026-03-15T00:00:58.076+0000] {processor.py:161} INFO - Started process (PID=1041) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:00:58.079+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:00:58.080+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:00:58.080+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:00:58.088+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:00:58.104+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:00:58.104+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:00:58.119+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:00:58.118+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:00:00+00:00, run_after=2026-03-15 00:05:00+00:00
+[2026-03-15T00:00:58.133+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.060 seconds
+[2026-03-15T00:01:28.403+0000] {processor.py:161} INFO - Started process (PID=1042) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:01:28.407+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:01:28.408+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:01:28.408+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:01:28.414+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:01:28.426+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:01:28.425+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:01:28.436+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:01:28.435+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:00:00+00:00, run_after=2026-03-15 00:05:00+00:00
+[2026-03-15T00:01:28.447+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.047 seconds
+[2026-03-15T00:01:58.702+0000] {processor.py:161} INFO - Started process (PID=1043) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:01:58.706+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:01:58.707+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:01:58.707+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:01:58.714+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:01:58.728+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:01:58.728+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:01:58.739+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:01:58.739+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:00:00+00:00, run_after=2026-03-15 00:05:00+00:00
+[2026-03-15T00:01:58.751+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.052 seconds
+[2026-03-15T00:02:28.981+0000] {processor.py:161} INFO - Started process (PID=1044) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:02:28.985+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:02:28.986+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:02:28.986+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:02:28.995+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:02:29.007+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:02:29.007+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:02:29.020+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:02:29.020+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:00:00+00:00, run_after=2026-03-15 00:05:00+00:00
+[2026-03-15T00:02:29.032+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.056 seconds
+[2026-03-15T00:02:59.283+0000] {processor.py:161} INFO - Started process (PID=1045) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:02:59.287+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:02:59.288+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:02:59.288+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:02:59.295+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:02:59.309+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:02:59.309+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:02:59.321+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:02:59.321+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:00:00+00:00, run_after=2026-03-15 00:05:00+00:00
+[2026-03-15T00:02:59.334+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.057 seconds
+[2026-03-15T00:03:29.570+0000] {processor.py:161} INFO - Started process (PID=1046) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:03:29.575+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:03:29.576+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:03:29.575+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:03:29.583+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:03:29.594+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:03:29.594+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:03:29.605+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:03:29.605+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:00:00+00:00, run_after=2026-03-15 00:05:00+00:00
+[2026-03-15T00:03:29.617+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.050 seconds
+[2026-03-15T00:03:59.852+0000] {processor.py:161} INFO - Started process (PID=1047) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:03:59.854+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:03:59.854+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:03:59.854+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:03:59.860+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:03:59.876+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:03:59.875+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:03:59.889+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:03:59.889+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:00:00+00:00, run_after=2026-03-15 00:05:00+00:00
+[2026-03-15T00:03:59.902+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.053 seconds
+[2026-03-15T00:04:30.100+0000] {processor.py:161} INFO - Started process (PID=1048) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:04:30.103+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:04:30.104+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:04:30.104+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:04:30.110+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:04:30.122+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:04:30.122+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:04:30.132+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:04:30.132+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:00:00+00:00, run_after=2026-03-15 00:05:00+00:00
+[2026-03-15T00:04:30.143+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.047 seconds
+[2026-03-15T00:05:00.364+0000] {processor.py:161} INFO - Started process (PID=1049) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:05:00.365+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:05:00.366+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:05:00.366+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:05:00.372+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:05:00.384+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:05:00.384+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:05:00.394+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:05:00.393+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:00:00+00:00, run_after=2026-03-15 00:05:00+00:00
+[2026-03-15T00:05:00.406+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.045 seconds
+[2026-03-15T00:05:30.702+0000] {processor.py:161} INFO - Started process (PID=1068) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:05:30.704+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:05:30.704+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:05:30.704+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:05:30.711+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:05:30.722+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:05:30.722+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:05:30.732+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:05:30.732+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:05:00+00:00, run_after=2026-03-15 00:10:00+00:00
+[2026-03-15T00:05:30.743+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.045 seconds
+[2026-03-15T00:06:00.930+0000] {processor.py:161} INFO - Started process (PID=1069) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:06:00.934+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:06:00.935+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:06:00.935+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:06:00.941+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:06:00.953+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:06:00.952+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:06:00.962+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:06:00.962+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:05:00+00:00, run_after=2026-03-15 00:10:00+00:00
+[2026-03-15T00:06:00.973+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.047 seconds
+[2026-03-15T00:06:31.162+0000] {processor.py:161} INFO - Started process (PID=1070) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:06:31.166+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:06:31.167+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:06:31.166+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:06:31.173+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:06:31.185+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:06:31.184+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:06:31.194+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:06:31.194+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:05:00+00:00, run_after=2026-03-15 00:10:00+00:00
+[2026-03-15T00:06:31.205+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.046 seconds
+[2026-03-15T00:07:01.394+0000] {processor.py:161} INFO - Started process (PID=1071) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:07:01.398+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:07:01.399+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:07:01.398+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:07:01.410+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:07:01.425+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:07:01.425+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:07:01.435+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:07:01.435+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:05:00+00:00, run_after=2026-03-15 00:10:00+00:00
+[2026-03-15T00:07:01.447+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.056 seconds
+[2026-03-15T00:07:31.615+0000] {processor.py:161} INFO - Started process (PID=1072) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:07:31.615+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:07:31.616+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:07:31.616+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:07:31.622+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:07:31.634+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:07:31.634+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:07:31.644+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:07:31.644+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:05:00+00:00, run_after=2026-03-15 00:10:00+00:00
+[2026-03-15T00:07:31.657+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.044 seconds
+[2026-03-15T00:08:01.848+0000] {processor.py:161} INFO - Started process (PID=1073) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:08:01.851+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:08:01.853+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:08:01.852+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:08:01.859+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:08:01.872+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:08:01.871+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:08:01.882+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:08:01.881+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:05:00+00:00, run_after=2026-03-15 00:10:00+00:00
+[2026-03-15T00:08:01.893+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.049 seconds
+[2026-03-15T00:08:32.082+0000] {processor.py:161} INFO - Started process (PID=1074) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:08:32.086+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:08:32.087+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:08:32.087+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:08:32.099+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:08:32.116+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:08:32.116+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:08:32.126+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:08:32.126+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:05:00+00:00, run_after=2026-03-15 00:10:00+00:00
+[2026-03-15T00:08:32.138+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.059 seconds
+[2026-03-15T00:09:02.302+0000] {processor.py:161} INFO - Started process (PID=1075) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:09:02.303+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:09:02.304+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:09:02.304+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:09:02.310+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:09:02.322+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:09:02.322+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:09:02.333+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:09:02.333+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:05:00+00:00, run_after=2026-03-15 00:10:00+00:00
+[2026-03-15T00:09:02.345+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.046 seconds
+[2026-03-15T00:09:32.531+0000] {processor.py:161} INFO - Started process (PID=1076) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:09:32.536+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:09:32.539+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:09:32.538+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:09:32.547+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:09:32.563+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:09:32.563+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:09:32.577+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:09:32.576+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:05:00+00:00, run_after=2026-03-15 00:10:00+00:00
+[2026-03-15T00:09:32.591+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.065 seconds
+[2026-03-15T00:10:21.656+0000] {processor.py:161} INFO - Started process (PID=1095) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:10:21.657+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:10:21.657+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:10:21.657+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:10:21.664+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:10:21.676+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:10:21.676+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:10:21.686+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:10:21.686+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:10:00+00:00, run_after=2026-03-15 00:15:00+00:00
+[2026-03-15T00:10:21.697+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.045 seconds
+[2026-03-15T00:10:51.833+0000] {processor.py:161} INFO - Started process (PID=1096) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:10:51.836+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:10:51.838+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:10:51.837+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:10:51.844+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:10:51.860+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:10:51.860+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:10:51.873+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:10:51.873+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:10:00+00:00, run_after=2026-03-15 00:15:00+00:00
+[2026-03-15T00:10:51.888+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.058 seconds
+[2026-03-15T00:11:22.237+0000] {processor.py:161} INFO - Started process (PID=1097) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:11:22.241+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:11:22.244+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:11:22.242+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:11:22.252+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:11:22.268+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:11:22.267+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:11:22.282+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:11:22.282+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:10:00+00:00, run_after=2026-03-15 00:15:00+00:00
+[2026-03-15T00:11:22.298+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.064 seconds
+[2026-03-15T00:11:52.655+0000] {processor.py:161} INFO - Started process (PID=1098) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:11:52.657+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:11:52.658+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:11:52.657+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:11:52.664+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:11:52.676+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:11:52.675+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:11:52.686+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:11:52.686+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:10:00+00:00, run_after=2026-03-15 00:15:00+00:00
+[2026-03-15T00:11:52.697+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.045 seconds
+[2026-03-15T00:12:23.049+0000] {processor.py:161} INFO - Started process (PID=1099) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:12:23.053+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:12:23.054+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:12:23.054+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:12:23.068+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:12:23.083+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:12:23.083+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:12:23.093+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:12:23.093+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:10:00+00:00, run_after=2026-03-15 00:15:00+00:00
+[2026-03-15T00:12:23.104+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.059 seconds
+[2026-03-15T00:12:53.231+0000] {processor.py:161} INFO - Started process (PID=1100) to work on /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:12:53.236+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/telemetry_batch.py for tasks to queue
+[2026-03-15T00:12:53.236+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:12:53.236+0000] {dagbag.py:540} INFO - Filling up the DagBag from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:12:53.243+0000] {processor.py:840} INFO - DAG(s) 'lakehouse_telemetry_ingestion' retrieved from /opt/airflow/dags/telemetry_batch.py
+[2026-03-15T00:12:53.259+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:12:53.259+0000] {dag.py:3047} INFO - Sync 1 DAGs
+[2026-03-15T00:12:53.273+0000] {logging_mixin.py:188} INFO - [2026-03-15T00:12:53.272+0000] {dag.py:3834} INFO - Setting next_dagrun for lakehouse_telemetry_ingestion to 2026-03-15 00:10:00+00:00, run_after=2026-03-15 00:15:00+00:00
+[2026-03-15T00:12:53.288+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/telemetry_batch.py took 0.061 seconds

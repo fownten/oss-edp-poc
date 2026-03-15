@@ -1,0 +1,38 @@
+[2026-03-14T11:06:49.852+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: lakehouse_telemetry_ingestion.run_spark_iceberg_ingestion scheduled__2026-03-14T11:00:00+00:00 [queued]>
+[2026-03-14T11:06:49.855+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: lakehouse_telemetry_ingestion.run_spark_iceberg_ingestion scheduled__2026-03-14T11:00:00+00:00 [queued]>
+[2026-03-14T11:06:49.855+0000] {taskinstance.py:2193} INFO - Starting attempt 2 of 2
+[2026-03-14T11:06:49.867+0000] {taskinstance.py:2214} INFO - Executing <Task(DockerOperator): run_spark_iceberg_ingestion> on 2026-03-14 11:00:00+00:00
+[2026-03-14T11:06:49.870+0000] {standard_task_runner.py:60} INFO - Started process 173 to run task
+[2026-03-14T11:06:49.872+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'lakehouse_telemetry_ingestion', 'run_spark_iceberg_ingestion', 'scheduled__2026-03-14T11:00:00+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/telemetry_batch.py', '--cfg-path', '/tmp/tmpscxid4go']
+[2026-03-14T11:06:49.876+0000] {standard_task_runner.py:88} INFO - Job 7: Subtask run_spark_iceberg_ingestion
+[2026-03-14T11:06:49.902+0000] {task_command.py:423} INFO - Running <TaskInstance: lakehouse_telemetry_ingestion.run_spark_iceberg_ingestion scheduled__2026-03-14T11:00:00+00:00 [running]> on host 931907dd02fa
+[2026-03-14T11:06:49.944+0000] {taskinstance.py:2510} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='enwyse-data-eng' AIRFLOW_CTX_DAG_ID='lakehouse_telemetry_ingestion' AIRFLOW_CTX_TASK_ID='run_spark_iceberg_ingestion' AIRFLOW_CTX_EXECUTION_DATE='2026-03-14T11:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-03-14T11:00:00+00:00'
+[2026-03-14T11:06:49.970+0000] {docker.py:486} INFO - Pulling docker image bitnami/spark:3.5.3
+[2026-03-14T11:06:52.170+0000] {taskinstance.py:2728} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/client.py", line 265, in _raise_for_status
+    response.raise_for_status()
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http+docker://localhost/v1.51/images/create?tag=3.5.3&fromImage=bitnami%2Fspark
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 444, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 414, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 488, in execute
+    for output in self.cli.pull(self.image, stream=True, decode=True):
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/image.py", line 429, in pull
+    self._raise_for_status(response)
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/client.py", line 267, in _raise_for_status
+    raise create_api_error_from_http_exception(e) from e
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/errors.py", line 39, in create_api_error_from_http_exception
+    raise cls(e, response=response, explanation=explanation) from e
+docker.errors.NotFound: 404 Client Error for http+docker://localhost/v1.51/images/create?tag=3.5.3&fromImage=bitnami%2Fspark: Not Found ("manifest for bitnami/spark:3.5.3 not found: manifest unknown: manifest unknown")
+[2026-03-14T11:06:52.173+0000] {taskinstance.py:1149} INFO - Marking task as FAILED. dag_id=lakehouse_telemetry_ingestion, task_id=run_spark_iceberg_ingestion, execution_date=20260314T110000, start_date=20260314T110649, end_date=20260314T110652
+[2026-03-14T11:06:52.184+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 7 for task run_spark_iceberg_ingestion (404 Client Error for http+docker://localhost/v1.51/images/create?tag=3.5.3&fromImage=bitnami%2Fspark: Not Found ("manifest for bitnami/spark:3.5.3 not found: manifest unknown: manifest unknown"); 173)
+[2026-03-14T11:06:52.213+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-03-14T11:06:52.232+0000] {taskinstance.py:3309} INFO - 0 downstream tasks scheduled from follow-on schedule check

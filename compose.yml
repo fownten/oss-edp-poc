@@ -1,0 +1,193 @@
+services:
+  timescaledb:
+    image: timescale/timescaledb:2.25.2-pg17
+    container_name: db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    volumes:
+      - timescaledb_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: energy_db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  grafana:
+    image: grafana/grafana:12.4.1
+    container_name: dashboards
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true # easier demoing
+    depends_on:
+      timescaledb:
+        condition: service_healthy
+
+  mosquitto:
+    image: eclipse-mosquitto:1.4.8
+    container_name: mqtt
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+  redpanda:
+    image: redpandadata/redpanda:v25.3.10
+    container_name: redpanda
+    restart: unless-stopped
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    command:
+      - redpanda
+      - start
+      - --smp 1
+      - --memory 1G
+      - --reserve-memory 0M
+      - --overprovisioned
+      - --node-id 0
+      - --kafka-addr PLAINTEXT://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
+      - --advertise-kafka-addr PLAINTEXT://redpanda:29092,OUTSIDE://localhost:9092
+
+  redpanda-console:
+    image: redpandadata/console:latest
+    container_name: redpanda-console
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - KAFKA_BROKERS=redpanda:29092
+    depends_on:
+      - redpanda
+
+  generator:
+    build: ./generator
+    container_name: generator
+    restart: unless-stopped
+    environment:
+      - MQTT_BROKER_URL=tcp://mosquitto:1883
+    depends_on:
+      - mosquitto
+
+  bridge:
+    build: ./bridge
+    container_name: bridge
+    restart: unless-stopped
+    environment:
+      - MQTT_BROKER=mosquitto
+      - MQTT_PORT=1883
+      - KAFKA_BROKER=redpanda:29092
+      - KAFKA_TOPIC=telemetry_stream
+    depends_on:
+      - mosquitto
+      - redpanda
+
+  timescale-writer:
+    build: ./timescale-writer
+    container_name: timescale-writer
+    restart: unless-stopped
+    environment:
+      - KAFKA_BROKER=redpanda:29092
+      - KAFKA_TOPIC=telemetry_stream
+      - DB_DSN=postgresql://postgres:password123@timescaledb:5432/energy_db
+    depends_on:
+      - redpanda
+      - timescaledb
+
+  rest-api:
+    build: ./api
+    container_name: rest-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_DSN=postgresql://postgres:password123@timescaledb:5432/energy_db
+    depends_on:
+      timescaledb:
+        condition: service_healthy
+
+# --------------------------
+# DATA LAKEHOUSE (cold path)
+# --------------------------
+# s3 object storage
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=password123
+    ports:
+      - "9000:9000"
+      - "9090:9001"
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+    restart: unless-stopped
+
+  # drains redpanda to minio landing-zone bucket
+  lake-writer:
+    build: ./lake-writer
+    container_name: lake-writer
+    environment:
+      - KAFKA_BROKER=redpanda:29092
+      - KAFKA_TOPIC=telemetry_stream
+      - MINIO_ENDPOINT=http://minio:9000
+      - MINIO_ACCESS_KEY=admin
+      - MINIO_SECRET_KEY=password123
+    depends_on:
+      - redpanda
+      - minio
+    restart: unless-stopped
+
+  # iceberg catalog
+  nessie:
+    image: projectnessie/nessie:latest
+    container_name: nessie
+    ports:
+      - "19120:19120"
+    restart: unless-stopped
+
+  trino:
+    image: trinodb/trino:439
+    container_name: trino
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./trino/nessie.properties:/etc/trino/catalog/nessie.properties
+    depends_on:
+      - minio
+      - nessie
+    restart: unless-stopped
+
+  # spark container orchestrator, builds spark containers dynamically
+  airflow:
+    build: ./airflow
+    container_name: airflow
+    ports:
+      - "8085:8080"
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      # Mount the Docker socket so Airflow can launch Spark containers!
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: standalone
+    restart: unless-stopped
+
+
+volumes:
+  timescaledb_data:
+  grafana_data:
+  minio_data:

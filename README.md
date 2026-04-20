@@ -1,4 +1,4 @@
-# 🌍 Enterprise IoT Telemetry Hub
+# 🌍 Enterprise Data Platform POC
 
 This project is a complete, event-driven Data Engineering Proof of Concept (PoC) designed to simulate an enterprise-grade IoT ingestion pipeline for the energy sector (e.g., Solar Yield and Battery State of Charge). 
 

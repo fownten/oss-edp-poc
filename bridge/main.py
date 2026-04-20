@@ -20,7 +20,7 @@ def delivery_report(err, msg):
 
 def on_connect(client, userdata, flags, reason_code, properties=None):
     print("✅ Connected to Mosquitto! Subscribing to devices...")
-    client.subscribe("enwyse/telemetry/#")
+    client.subscribe("edp/telemetry/#")
 
 
 def on_message(client, userdata, msg):

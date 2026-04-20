@@ -1,54 +1,104 @@
-# 🌍 Enterprise Data Platform POC
+# Enterprise Data Platform (EDP) — telemetry PoC
 
-This project is a complete, event-driven Data Engineering Proof of Concept (PoC) designed to simulate an enterprise-grade IoT ingestion pipeline for the energy sector (e.g., Solar Yield and Battery State of Charge). 
+End-to-end data engineering demo: simulated IoT devices publish energy-style telemetry through a **hot path** (streaming to TimescaleDB and dashboards) and a **cold path** (object storage plus scheduled Spark into an Iceberg lakehouse). Use it as a portable interview or learning stack.
 
-It demonstrates a decoupled architecture capable of handling high-velocity telemetry data from physical edge devices, buffering it fault-tolerantly, and persisting it for time-series analysis.
+## Architecture
 
-## 🏗️ Architecture Stack
+```mermaid
+flowchart LR
+  subgraph edge [Edge]
+    Gen[Go generator]
+  end
+  subgraph mqtt [MQTT]
+    Mosq[Mosquitto]
+  end
+  subgraph stream [Streaming]
+    Bridge[Python bridge]
+    RP[Redpanda]
+  end
+  subgraph hot [Hot path]
+    TW[timescale-writer]
+    TS[(TimescaleDB)]
+    Graf[Grafana]
+    API[REST API]
+  end
+  subgraph cold [Cold path]
+    LW[lake-writer]
+    MinIO[(MinIO)]
+    AF[Airflow]
+    Spark[Spark ingest]
+    Nessie[Nessie]
+    Ice[(Iceberg gold)]
+    Trino[Trino]
+  end
+  Gen --> Mosq
+  Mosq --> Bridge
+  Bridge --> RP
+  RP --> TW
+  TW --> TS
+  TS --> Graf
+  TS --> API
+  RP --> LW
+  LW --> MinIO
+  AF --> Spark
+  Spark --> MinIO
+  Spark --> Nessie
+  Nessie --> Ice
+  Trino --> Ice
+```
 
-* **The Edge Simulator (Go):** Highly concurrent goroutines simulating physical inverters. Publishes lightweight payloads via the Eclipse Paho MQTT driver.
-* **The Ingestion Hub (Mosquitto):** A lightweight MQTT broker representing the edge-to-cloud gateway (mimicking Azure IoT Hub).
-* **The Event Stream (Redpanda/Kafka):** A high-performance, Kafka-compatible message broker that provides extreme durability and backpressure handling (mimicking Azure Event Hubs).
-* **The Stream Sink (Python):** A worker microservice (`confluent-kafka` & `psycopg2`) dedicated to continuously draining the Kafka topic and bulk-inserting records into the database.
-* **The Database (TimescaleDB):** PostgreSQL enhanced with the Timescale extension. Data is written to an optimized time-series `Hypertable` for hyper-fast aggregations.
-* **The Visualization Layer (Grafana):** A real-time dashboard directly querying the Hypertable to visualize live energy metrics.
+- **Edge:** Go service publishes JSON telemetry to MQTT under `edp/telemetry/{device_id}`.
+- **Ingestion:** Python bridge subscribes to `edp/telemetry/#` and produces to the Kafka topic `telemetry_stream`.
+- **Hot path:** `timescale-writer` consumes the topic and inserts into TimescaleDB. Grafana and the FastAPI service read from the same database.
+- **Cold path:** `lake-writer` buffers Kafka messages to NDJSON objects in MinIO (`landing-zone`). Airflow runs `spark/ingest.py` on a schedule to append into Iceberg (`nessie.gold.sensor_telemetry_historical`) with Nessie as the catalog and MinIO as warehouse storage. Trino is optional SQL over the Iceberg catalog.
 
-## 🚀 Getting Started
+## Prerequisites
 
-### Prerequisites
-* Docker & Docker Compose
+- Docker and Docker Compose (Compose V2)
 
-### 1. Spin up the Infrastructure
-From the root directory, build and launch the entire multi-container stack:
+## Run the stack
+
+From the **repository root** (so `EDP_REPO_ROOT=${PWD}` resolves correctly for Airflow’s Spark bind mount):
+
 ```bash
 docker compose up -d --build
 ```
 
-### 2. Verify the Services
-Ensure all 6 containers are running successfully:
+Check containers:
+
 ```bash
 docker compose ps
 ```
-You should see:
-1.  `enwyse-db` (TimescaleDB)
-2.  `enwyse-mqtt` (Mosquitto)
-3.  `enwyse-kafka` (Redpanda)
-4.  `enwyse-generator` (Go Edge Simulator)
-5.  `enwyse-bridge` (Python MQTT-to-Kafka)
-6.  `enwyse-timescale-writer` (Python Kafka-to-DB)
-7.  `enwyse-grafana` (Visualization)
-8.  `enwyse-redpanda-console` (Kafka UI)
 
-### 3. Access the UIs
-* **Grafana Dashboard:** `http://localhost:3000` (admin / admin)
-* **Redpanda Console:** `http://localhost:8080` (Live view of the `telemetry_stream` topic)
+## Services and ports
 
-## 🗄️ Database Setup (One-Time)
-If starting from a fresh volume, initialize the TimescaleDB Hypertable by connecting to the database container:
+Compose sets `container_name` on each service; use these names with `docker exec`.
+
+| Service | Container name | Host port | Notes |
+|--------|----------------|-----------|--------|
+| TimescaleDB | `db` | 5432 | Primary hot-path store |
+| Grafana | `dashboards` | 3000 | Default admin password: `admin` |
+| Mosquitto | `mqtt` | 1883, 9001 | MQTT broker |
+| Redpanda | `redpanda` | 9092, 29092 | Kafka-compatible broker |
+| Redpanda Console | `redpanda-console` | 8080 | Topic inspection (`telemetry_stream`) |
+| Generator | `generator` | — | Publishes to MQTT |
+| Bridge | `bridge` | — | MQTT → Kafka |
+| Timescale writer | `timescale-writer` | — | Kafka → DB |
+| REST API | `rest-api` | 8000 | FastAPI over TimescaleDB |
+| MinIO | `minio` | 9000 (S3 API), 9090 (console) | Landing + warehouse buckets |
+| Lake writer | `lake-writer` | — | Kafka → MinIO landing zone |
+| Nessie | `nessie` | 19120 | Iceberg catalog API |
+| Trino | `trino` | 8081 | Query Iceberg via Nessie catalog |
+| Airflow | `airflow` | 8085 | Orchestrates Spark batch (DAG `lakehouse_telemetry_ingestion`) |
+
+## One-time database setup
+
+On a fresh Timescale volume, create the hypertable (from repo root):
+
 ```bash
-docker exec -it enwyse-db psql -U postgres -d energy_db
+docker exec -it db psql -U postgres -d energy_db
 ```
-Execute the schema creation:
+
 ```sql
 CREATE TABLE sensor_telemetry (
     time TIMESTAMPTZ NOT NULL,
@@ -57,14 +107,42 @@ CREATE TABLE sensor_telemetry (
     battery_soc_pct DOUBLE PRECISION
 );
 
--- Convert to Timescale Hypertable
 SELECT create_hypertable('sensor_telemetry', 'time');
 CREATE INDEX ix_device_time ON sensor_telemetry (device_id, time DESC);
 ```
 
-## 🛑 Operations
-To gracefully tear down the architecture and stop the data generation:
+## Cold path and Airflow
+
+- The DAG `lakehouse_telemetry_ingestion` runs roughly every five minutes, starting a short-lived Spark container that reads NDJSON from `s3a://landing-zone/telemetry/`, appends to `nessie.gold.sensor_telemetry_historical`, then clears the landing prefix it processed.
+- Spark must join the same Docker network as MinIO and Nessie; the project uses Compose **`name: edp`**, so the default network is **`edp_default`** (wired in the DAG).
+- **Run `docker compose` from the repository root** so Airflow receives `EDP_REPO_ROOT` pointing at this checkout (used to bind-mount `./spark` into the Spark job). If you start Compose elsewhere, set `EDP_REPO_ROOT` to the absolute path of this repo before bringing up `airflow`.
+
+## Inspecting MQTT traffic
+
+Subscribe to all device topics (matches the Go generator):
+
+```bash
+make mqtt
+```
+
+This uses topic `edp/telemetry/#` inside the `mqtt` container.
+
+## Trino (optional)
+
+```bash
+make trino
+```
+
+Uses catalog `nessie`, schema `gold`.
+
+## Tear down
+
 ```bash
 docker compose down
 ```
-*(Note: To wipe the database and Grafana state entirely, use `docker compose down -v` to destroy the persistent volumes).*
+
+To remove volumes (database, Grafana, MinIO, etc.):
+
+```bash
+docker compose down -v
+```

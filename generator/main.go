@@ -34,7 +34,7 @@ func simulateDevice(deviceID string, brokerURL string) {
 		time.Sleep(2 * time.Second)
 	}
 
-	topic := fmt.Sprintf("enwyse/telemetry/%s", deviceID)
+	topic := fmt.Sprintf("edp/telemetry/%s", deviceID)
 	// infinity telemetry loop
 	for {
 		solar := math.Round((rand.Float64()*40.0+10.0)*100) / 100
@@ -60,7 +60,7 @@ func simulateDevice(deviceID string, brokerURL string) {
 }
 
 func main() {
-	fmt.Println("🚀 Starting Enwyse Edge MQTT Generator...")
+	fmt.Println("🚀 Starting EDP Edge MQTT Generator...")
 
 	// 1. Read from the environment, fallback to localhost for local testing
 	brokerURL := os.Getenv("MQTT_BROKER_URL")

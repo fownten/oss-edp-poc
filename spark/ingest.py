@@ -14,10 +14,10 @@ MINIO_ACCESS_KEY = os.environ.get("MINIO_ACCESS_KEY", "admin")
 MINIO_SECRET_KEY = os.environ.get("MINIO_SECRET_KEY", "password123")
 NESSIE_URI = os.environ.get("NESSIE_URI", "http://nessie:19120/api/v1")
 
-print("🚀 Initializing Spark Session for Enwyse Lakehouse...")
+print("🚀 Initializing Spark Session for EDP Lakehouse...")
 
 spark = (
-    SparkSession.builder.appName("Enwyse-Batch-Ingestion")
+    SparkSession.builder.appName("EDP-Batch-Ingestion")
     .config(
         "spark.jars.packages",
         "org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:1.4.3,org.projectnessie.nessie-integrations:nessie-spark-extensions-3.5_2.12:0.77.1,org.apache.hadoop:hadoop-aws:3.3.4",

@@ -10,8 +10,8 @@ DB_DSN = os.environ.get(
 
 # --- Initialize FastAPI ---
 app = FastAPI(
-    title="Enwyse Telemetry API",
-    description="REST API for downstream apps to query IoT sensor data.",
+    title="EDP Telemetry API",
+    description="REST API for downstream apps to query IoT sensor data (Enterprise Data Platform PoC).",
     version="1.0.0",
 )
 

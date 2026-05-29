@@ -1,13 +1,13 @@
 .PHONY: psql, mqtt, up, down, ps, trino
 
+ps:
+	docker compose ps --format "table {{.Name}}\t{{.State}}\t{{.Ports}}"
+
 up:
 	docker compose up -d --build
 
 down:
 	docker compose down --remove-orphans
-
-ps:
-	docker compose ps --format "table {{.Name}}\t{{.State}}\t{{.Ports}}"
 
 psql:
 	docker exec -it db psql -U postgres -d energy_db

@@ -158,6 +158,10 @@ services:
     container_name: nessie
     ports:
       - "19120:19120"
+    environment:
+      # Explicitly disable OIDC and Authentication for local dev
+      - QUARKUS_OIDC_TENANT_ENABLED=false
+      - NESSIE_SERVER_AUTHENTICATION_ENABLED=false
     restart: unless-stopped
 
   trino:
@@ -176,6 +180,7 @@ services:
   airflow:
     build: ./airflow
     container_name: airflow
+    user: root
     ports:
       - "8085:8080"
     environment:

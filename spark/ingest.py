@@ -53,7 +53,9 @@ try:
     telemetry_schema = StructType(
         [
             StructField("time", StringType(), True),
+            StructField("factory_id", StringType(), True),
             StructField("device_id", StringType(), True),
+            StructField("device_type", StringType(), True),
             StructField("solar_yield_kw", DoubleType(), True),
             StructField("battery_soc_pct", DoubleType(), True),
         ]

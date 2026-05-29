@@ -304,13 +304,15 @@ docker exec -it db psql -U postgres -d energy_db
 ```sql
 CREATE TABLE sensor_telemetry (
     time TIMESTAMPTZ NOT NULL,
+    factory_id TEXT NOT NULL,
     device_id TEXT NOT NULL,
+    device_type TEXT NOT NULL,
     solar_yield_kw DOUBLE PRECISION,
     battery_soc_pct DOUBLE PRECISION
 );
 
 SELECT create_hypertable('sensor_telemetry', 'time');
-CREATE INDEX ix_device_time ON sensor_telemetry (device_id, time DESC);
+CREATE INDEX ix_factory_device_time ON sensor_telemetry (factory_id, device_id, time DESC);
 ```
 
 ---

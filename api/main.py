@@ -31,7 +31,7 @@ def get_device_telemetry(
 
         # Query the TimescaleDB Hypertable
         query = """
-            SELECT time, device_id, solar_yield_kw, battery_soc_pct
+            SELECT time, factory_id, device_id, device_type, solar_yield_kw, battery_soc_pct
             FROM sensor_telemetry
             WHERE device_id = %s
             ORDER BY time DESC
@@ -46,6 +46,40 @@ def get_device_telemetry(
         if not results:
             raise HTTPException(
                 status_code=404, detail=f"No data found for device: {device_id}"
+            )
+
+        return results
+
+    except psycopg2.Error as e:
+        raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
+
+
+@app.get("/api/v1/telemetry/factory/{factory_id}", summary="Get recent telemetry for a factory")
+def get_factory_telemetry(
+    factory_id: str,
+    limit: int = Query(20, description="Number of recent records to return", le=1000),
+):
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # Query the TimescaleDB Hypertable by factory_id
+        query = """
+            SELECT time, factory_id, device_id, device_type, solar_yield_kw, battery_soc_pct
+            FROM sensor_telemetry
+            WHERE factory_id = %s
+            ORDER BY time DESC
+            LIMIT %s;
+        """
+        cursor.execute(query, (factory_id, limit))
+        results = cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+
+        if not results:
+            raise HTTPException(
+                status_code=404, detail=f"No data found for factory: {factory_id}"
             )
 
         return results

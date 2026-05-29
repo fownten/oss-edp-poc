@@ -45,21 +45,31 @@ try:
         # Decode the JSON payload
         payload = json.loads(msg.value().decode("utf-8"))
 
-        # Insert into the Hypertable
+        factory_id = payload.get("factory_id", "factory-default")
+        device_id = payload.get("device_id", "unknown")
+        device_type = payload.get("device_type", "unknown")
+        event_time = payload.get("time")  # RFC3339 timestamp from Go generator
+        solar_yield = payload.get("solar_yield_kw")
+        battery_soc = payload.get("battery_soc_pct")
+
+        # Insert into the Hypertable using the payload event time (or fallback to NOW() if null)
         insert_query = """
-            INSERT INTO sensor_telemetry (time, device_id, solar_yield_kw, battery_soc_pct)
-            VALUES (NOW(), %s, %s, %s);
+            INSERT INTO sensor_telemetry (time, factory_id, device_id, device_type, solar_yield_kw, battery_soc_pct)
+            VALUES (COALESCE(%s, NOW()), %s, %s, %s, %s, %s);
         """
         cursor.execute(
             insert_query,
             (
-                payload["device_id"],
-                payload["solar_yield_kw"],
-                payload["battery_soc_pct"],
+                event_time,
+                factory_id,
+                device_id,
+                device_type,
+                solar_yield,
+                battery_soc,
             ),
         )
 
-        print(f"💾 Stored data for [{payload['device_id']}] in TimescaleDB")
+        print(f"💾 Stored data for [{factory_id}/{device_id}] ({device_type}) in TimescaleDB")
 
 except KeyboardInterrupt:
     print("\n🛑 Shutting down consumer...")

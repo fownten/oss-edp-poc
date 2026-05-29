@@ -25,13 +25,20 @@ def on_connect(client, userdata, flags, reason_code, properties=None):
 
 def on_message(client, userdata, msg):
     payload = msg.payload.decode("utf-8")
-    device_id = msg.topic.split("/")[-1]
+    parts = msg.topic.split("/")
+    if len(parts) >= 4:
+        factory_id = parts[2]
+        device_id = parts[3]
+    else:
+        factory_id = "unknown"
+        device_id = parts[-1]
 
-    print(f"🌉 Bridging data for [{device_id}]")
+    kafka_key = f"{factory_id}/{device_id}"
+    print(f"🌉 Bridging data for [{kafka_key}]")
 
     kafka_producer.produce(
         topic=KAFKA_TOPIC,
-        key=device_id.encode("utf-8"),
+        key=kafka_key.encode("utf-8"),
         value=payload,
         callback=delivery_report,
     )

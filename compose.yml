@@ -73,12 +73,42 @@ services:
     depends_on:
       - redpanda
 
-  generator:
+  generator-munich:
     build: ./generator
-    container_name: generator
+    container_name: generator-munich
     restart: unless-stopped
     environment:
       - MQTT_BROKER_URL=tcp://mosquitto:1883
+      - FACTORY_ID=factory-munich
+      - SOLAR_PANELS_COUNT=2
+      - BATTERIES_COUNT=1
+      - GENERATION_INTERVAL_SEC=5
+    depends_on:
+      - mosquitto
+
+  generator-berlin:
+    build: ./generator
+    container_name: generator-berlin
+    restart: unless-stopped
+    environment:
+      - MQTT_BROKER_URL=tcp://mosquitto:1883
+      - FACTORY_ID=factory-berlin
+      - SOLAR_PANELS_COUNT=3
+      - BATTERIES_COUNT=2
+      - GENERATION_INTERVAL_SEC=5
+    depends_on:
+      - mosquitto
+
+  generator-stuttgart:
+    build: ./generator
+    container_name: generator-stuttgart
+    restart: unless-stopped
+    environment:
+      - MQTT_BROKER_URL=tcp://mosquitto:1883
+      - FACTORY_ID=factory-stuttgart
+      - SOLAR_PANELS_COUNT=1
+      - BATTERIES_COUNT=1
+      - GENERATION_INTERVAL_SEC=5
     depends_on:
       - mosquitto
 

@@ -1,0 +1,13 @@
+apiVersion: 1
+
+providers:
+  - name: 'EDP Dashboards'
+    orgId: 1
+    folder: 'IoT Energy Telemetry'
+    type: file
+    disableDeletion: false
+    editable: true
+    updateIntervalSeconds: 10
+    allowUpdates: true
+    options:
+      path: /etc/grafana/dashboards

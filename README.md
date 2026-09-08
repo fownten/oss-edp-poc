@@ -124,26 +124,87 @@ From the repo root:
 ## Grafana (dashboards)
 
 - **URL:** http://localhost:3000  
-- **Login:** user `admin`, password `admin` (unless you changed `GF_SECURITY_ADMIN_PASSWORD` in Compose).  
-- Anonymous access may be enabled for demos; if you still see a login screen, use the credentials above.
+- **Login:** user `admin`, password `admin` (unless you changed `GF_SECURITY_ADMIN_PASSWORD` in `compose.yml`).  
+- **Zero-Configuration Setup:** Grafana automatically provisions the `TimescaleDB` data source and loads the pre-configured **EDP IoT Energy Telemetry** dashboard upon startup. No manual importing or data source setup is required!
 
-**Connect to TimescaleDB (if no datasource exists yet)**
+### Using the Dashboard
 
-1. In Grafana: **Connections → Data sources → Add data source → PostgreSQL**.
-2. **Host:** `timescaledb` (Docker network DNS name for the database **service** — not `localhost` from inside Grafana).
-3. **Port:** `5432`
-4. **Database:** `energy_db`
-5. **User / password:** `postgres` / `password123` (defaults from `compose.yml`; change in production).
-6. **TLS:** disable for this local stack.
-7. **Save & test**, then explore **Explore** to run SQL on `sensor_telemetry`.
+Once logged in, open the dashboard via the **Dashboards** menu. The dashboard is organized into three cohesive functional sections:
 
-**Example query in Explore**
+#### 1. Real-Time Operational Indicators (KPI Stats)
+- **Active Factories:** Shows the total count of factories currently reporting telemetry.
+- **Active Solar Arrays:** Number of individual solar generator devices currently publishing.
+- **Active Batteries:** Number of stateful energy storage units in the field.
+- **Average Solar Generation:** Average real-time power yield across all solar panels (in `kW`).
+- **Average Battery Level:** Average State of Charge (`SoC %`) across all operating batteries, color-coded based on overall charge health.
 
+#### 2. Real-Time Telemetry Tracking (Time Series)
+- **Real-Time Solar Power Yield (kW):** A continuous time-series chart showing smooth real-time generation profiles. Excellent for visualizing solar peak curves.
+- **Real-Time Battery Storage State of Charge (SoC %):** A multi-series chart depicting battery storage charging (daytime) and discharging (nighttime) behaviors, highlighted with caution thresholds for low battery status (< 25%).
+
+#### 3. Aggregated Insights & Logs
+- **Estimated Cumulative Energy Produced (kWh):** Integrates the power generated (`kW`) over time to calculate the real energy yield (`kWh`) aggregated by factory.
+- **Latest Device Status Monitor:** A high-density table showing the single most recent record for every device, featuring status gauges for battery SoC and orange-to-green heat-mapped cells for active solar yields.
+
+---
+
+### Dashboard Filtering (Templating Variables)
+At the top of the dashboard, you will find the dynamic **`factory_id`** filter:
+- Select **`All`** to see aggregated stats and separate lines for every single device across all geographic installations.
+- Select a specific factory (e.g., `factory-munich`, `factory-berlin`, or `factory-stuttgart`) to automatically narrow down all KPIs, charts, and table logs to that factory's assets.
+
+---
+
+### SQL Queries Under the Hood
+
+The dashboard utilizes advanced PostgreSQL time-series queries designed to extract telemetry efficiently:
+
+#### A. Time-Series Grouping
+Grafana passes macro helpers for dynamic time ranges, but we leverage TimescaleDB's native `time_bucket()` function to bin high-frequency data (like our 5-second generator loop) into clean chart intervals.
 ```sql
-SELECT time, device_id, solar_yield_kw, battery_soc_pct
+SELECT
+  time_bucket('5 seconds', time) AS time,
+  concat(factory_id, ' / ', device_id) AS metric,
+  avg(solar_yield_kw) AS "solar_yield_kw"
 FROM sensor_telemetry
-ORDER BY time DESC
-LIMIT 50;
+WHERE
+  $__timeFilter(time)
+  AND device_type = 'solar'
+  AND factory_id IN ($factory_id)
+GROUP BY 1, 2
+ORDER BY 1
+```
+
+#### B. Power-to-Energy Integration (kwh calculation)
+Because simulated devices report their active power level in `kW` every 5 seconds, we can integrate these discrete power readings to estimate total cumulative energy produced in Kilowatt-Hours (`kWh`):
+$$\text{Energy (kWh)} = \sum \left( \text{Power (kW)} \times \frac{5\text{ seconds}}{3600\text{ seconds/hour}} \right)$$
+```sql
+SELECT
+  factory_id AS "Factory",
+  sum(solar_yield_kw) * 5 / 3600.0 AS "Energy Yield (kWh)"
+FROM sensor_telemetry
+WHERE
+  $__timeFilter(time)
+  AND device_type = 'solar'
+  AND factory_id IN ($factory_id)
+GROUP BY factory_id
+ORDER BY "Energy Yield (kWh)" DESC;
+```
+
+#### C. High-Density Status Grid
+To avoid showing stale or repetitive historical rows in our status board, we use PostgreSQL's `DISTINCT ON` syntax to return only the single latest log entry for each device:
+```sql
+SELECT DISTINCT ON (factory_id, device_id)
+  time,
+  factory_id,
+  device_id,
+  device_type,
+  COALESCE(solar_yield_kw, 0) AS solar_yield_kw,
+  COALESCE(battery_soc_pct, 0) AS battery_soc_pct
+FROM sensor_telemetry
+WHERE time > NOW() - INTERVAL '5 minutes'
+  AND factory_id IN ($factory_id)
+ORDER BY factory_id, device_id, time DESC;
 ```
 
 ---
